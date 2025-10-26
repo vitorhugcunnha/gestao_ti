@@ -9,8 +9,8 @@ public class Licenca
 {
     public int IdLicenca { get; private set; }
     public string NomeSoftware { get; set; }
-    public DateTime DataValidade { get; set; } // RF13
-    public int CapacidadeTotal { get; set; } // RF16
+    public DateTime DataValidade { get; set; }
+    public int CapacidadeTotal { get; set; }
 
     // Relacionamento: Uma licença "controla" várias instalações (AtivoSoftware)
     private List<AtivoSoftware> instalacoes;
@@ -20,8 +20,8 @@ public class Licenca
     {
         this.IdLicenca = new Random().Next(1000, 9999); // Simulação de ID
         this.NomeSoftware = nomeSoftware;
-        this.DataValidade = dataValidade; // RF13
-        this.CapacidadeTotal = capacidadeTotal; // RF16
+        this.DataValidade = dataValidade;
+        this.CapacidadeTotal = capacidadeTotal;
         this.instalacoes = new List<AtivoSoftware>();
     }
     
@@ -30,8 +30,6 @@ public class Licenca
     /// </summary>
     public void AdicionarInstalacao(AtivoSoftware software)
     {
-        // RF16: O sistema deve garantir que o número de instalações ativas não
-        //       exceda a capacidade total da licença.
         if (VerificarCapacidadeExcedida())
         {
             // Impede que o AtivoSoftware seja criado se a licença estiver cheia
@@ -47,7 +45,7 @@ public class Licenca
     }
 
     /// <summary>
-    /// Verifica se o número de instalações excede o permitido (RF16).
+    /// Verifica se o número de instalações excede o permitido
     /// </summary>
     public bool VerificarCapacidadeExcedida()
     {
@@ -56,12 +54,11 @@ public class Licenca
     }
 
     /// <summary>
-    /// Verifica se a licença está próxima de vencer (RF15).
+    /// Verifica se a licença está próxima de vencer
     /// </summary>
     public bool VerificarVencimento(int diasAntecedencia)
     {
-        // RF15: O sistema deve alertar o Técnico de TI com 60 e 30 dias de
-        //       antecedência do vencimento da licença.
+        // Alerta com 60 e 30 dias de antecedência do vencimento da licença.
         return (this.DataValidade - DateTime.Now).TotalDays <= diasAntecedencia;
     }
 }

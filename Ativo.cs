@@ -33,7 +33,7 @@ public abstract class Ativo
         this.Modelo = modelo;
         this.DataAquisicao = dataAquisicao;
         
-        // RF04, RF09: Define o status inicial. Um ativo novo sempre entra "Em Estoque".
+        // Define o status inicial. Um ativo novo sempre entra "Em Estoque".
         this.Status = StatusAtivo.EmEstoque;
         this.HistoricoAlocacoes = new List<Alocacao>();
     }
@@ -74,12 +74,10 @@ public abstract class Ativo
             throw new InvalidOperationException("Este ativo não está 'Em Uso' no momento.");
         }
 
-        // RF11: O sistema deve registrar a desalocação e retorno de um ativo,
-        //       registrando a Data de Fim e o Motivo.
+        // Registra a desalocação e retorno de um ativo, registrando a Data de Fim e o Motivo.
         alocacaoAtiva.Finalizar(dataFim, motivo);
         
-        // RF12: O sistema deve atualizar o status do ativo para "Em Estoque" ou
-        //       "Manutenção" automaticamente... após o seu retorno.
+        // Atualiza o status do ativo para "Em Estoque" ou "Manutenção" automaticamente... após o seu retorno.
         if(novoStatusAposRetorno != StatusAtivo.EmEstoque && novoStatusAposRetorno != StatusAtivo.Manutencao)
         {
             throw new ArgumentException("O novo status após retorno deve ser 'EmEstoque' ou 'Manutencao'.");
@@ -88,7 +86,7 @@ public abstract class Ativo
     }
 
     /// <summary>
-    /// Método (privado/protegido) que centraliza a mudança de status (RF04).
+    /// Método (privado) que centraliza a mudança de status.
     /// </summary>
     private void AtualizarStatus(StatusAtivo novoStatus)
     {
@@ -98,11 +96,11 @@ public abstract class Ativo
     }
     
     /// <summary>
-    /// Verifica se o ativo está próximo do descarte (para RF17).
+    /// Verifica se o ativo está próximo do descarte.
     /// </summary>
     public bool EstaProximoDescarte(int anosCicloVida = 4)
     {
-        // RF17: ...para equipamentos com mais de 4 anos de uso.
+        // Para equipamentos com mais de 4 anos de uso.
         return (DateTime.Now - this.DataAquisicao).TotalDays > (anosCicloVida * 365);
     }
 
@@ -110,7 +108,7 @@ public abstract class Ativo
     
     /// <summary>
     /// Contrato (método abstrato) que OBRIGA as classes filhas
-    /// a implementar sua própria lógica de verificação de duplicidade (RF05).
+    /// a implementar sua própria lógica de verificação de duplicidade.
     /// </summary>
-    public abstract bool ValidarDuplicidade(); // RF05
+    public abstract bool ValidarDuplicidade();
 }

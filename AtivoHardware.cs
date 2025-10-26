@@ -6,7 +6,7 @@ using System;
 /// </summary>
 public class AtivoHardware : Ativo
 {
-    // Atributo específico de Hardware (RF03)
+    // Atributo específico de Hardware
     public string NumeroSerie { get; set; }
 
     /// <summary>
@@ -21,15 +21,15 @@ public class AtivoHardware : Ativo
 
     /// <summary>
     /// Implementação OBRIGATÓRIA do método abstrato.
-    /// RF05: ...controlar a duplicidade de ativos de hardware pelo Número de Série...
+    /// Controla a duplicidade de ativos de hardware pelo Número de Série...
     /// </summary>
     public override bool ValidarDuplicidade()
     {
         // --- INÍCIO DA LÓGICA DE IMPLEMENTAÇÃO ---
-        // Em um sistema real, aqui você faria uma consulta ao Banco de Dados.
+        // Em um sistema real, haveria uma consulta ao Banco de Dados.
         // Ex: return repositorio.ExisteHardwareComNumeroSerie(this.NumeroSerie);
         
-        Console.WriteLine($"Verificando duplicidade de Hardware pelo N/S: {this.NumeroSerie}");
+        Console.WriteLine($"Verificando duplicidade de Hardware pelo número de série: {this.NumeroSerie}");
         // Simulação:
         if (this.NumeroSerie == "123456-DUPLICADO")
         {

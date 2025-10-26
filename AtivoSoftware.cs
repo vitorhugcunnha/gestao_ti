@@ -30,7 +30,7 @@ public class AtivoSoftware : Ativo
     public override bool ValidarDuplicidade()
     {
         // --- INÍCIO DA LÓGICA DE IMPLEMENTAÇÃO ---
-        // Em um sistema real, aqui você faria uma consulta ao Banco de Dados.
+        // Em um sistema real, haveria uma consulta ao Banco de Dados.
         // Ex: return repositorio.ExisteSoftwareComChave(this.ChaveLicenca);
         
         Console.WriteLine($"Verificando duplicidade de Software pela Chave: {this.ChaveLicenca}");
