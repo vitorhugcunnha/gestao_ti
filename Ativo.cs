@@ -8,7 +8,6 @@ using System.Linq;
 /// </summary>
 public abstract class Ativo
 {
-    // Atributos (Propriedades do C#)
     public string IdPatrimonial { get; private set; }
     public string Tipo { get; set; }
     public string Marca { get; set; }

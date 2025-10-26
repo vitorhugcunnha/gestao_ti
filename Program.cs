@@ -27,7 +27,7 @@ namespace GestaoDeAtivos
                 ExibirMenuPrincipal();
                 
                 // 2. Ler a escolha do usuário
-                // CORREÇÃO (CS8600): 'ReadLine' retorna string?, mas 'opcao' era 'string'.
+                // 'ReadLine' retorna string?, mas 'opcao' era 'string'.
                 // Mudamos 'opcao' para 'string?' para aceitar o nulo.
                 string? opcao = Console.ReadLine();
                 
@@ -100,8 +100,7 @@ namespace GestaoDeAtivos
             Console.Clear();
             Console.WriteLine("--- 1. Cadastro de Novo Hardware ---");
             
-            // CORREÇÃO (CS8600, CS8604): Usamos o operador '!' (null-forgiving)
-            // para dizer ao compilador que garantimos que ReadLine() não será nulo.
+            // Operador '!' (null-forgiving) utilizado para dizer ao compilador que garantimos que ReadLine() não será nulo.
             Console.Write("Tipo (ex: Notebook): ");
             string tipo = Console.ReadLine()!;
             Console.Write("Marca (ex: Dell): ");
@@ -125,7 +124,6 @@ namespace GestaoDeAtivos
             Console.Clear();
             Console.WriteLine("--- 2. Cadastro de (Licença Mãe) ---");
 
-            // CORREÇÃO (CS8600, CS8604): Usando o operador '!'
             Console.Write("Nome do Software (ex: Adobe Photoshop): ");
             string nome = Console.ReadLine()!;
             Console.Write("Capacidade Total (Nº de usuários): ");
@@ -156,11 +154,10 @@ namespace GestaoDeAtivos
                 Console.WriteLine($"ID: {l.IdLicenca} | Nome: {l.NomeSoftware} | Vagas: {l.CapacidadeTotal - l.GetInstalacoesAtivas()}");
             }
             
-            // CORREÇÃO (CS8604): Usando o operador '!'
             Console.Write("Digite o ID da Licença-Mãe para vincular este software: ");
             int idLicenca = int.Parse(Console.ReadLine()!);
             
-            // CORREÇÃO (CS8600): 'licencaMae' pode ser nula (FirstOrDefault).
+            // 'licencaMae' pode ser nula (FirstOrDefault).
             // Declaramos como 'Licenca?' (anulável).
             Licenca? licencaMae = DB_Licencas.FirstOrDefault(l => l.IdLicenca == idLicenca);
             
@@ -171,7 +168,6 @@ namespace GestaoDeAtivos
                 return;
             }
 
-            // CORREÇÃO (CS8600, CS8604): Usando o operador '!'
             Console.Write("Chave de Licença (Key): ");
             string chave = Console.ReadLine()!;
 
@@ -200,7 +196,6 @@ namespace GestaoDeAtivos
             Console.Clear();
             Console.WriteLine("--- 4. Cadastro de Novo Colaborador ---");
 
-            // CORREÇÃO (CS8600, CS8604): Usando o operador '!'
             Console.Write("ID (Matrícula, ex: C1001): ");
             string id = Console.ReadLine()!;
             Console.Write("Nome: ");
@@ -222,11 +217,10 @@ namespace GestaoDeAtivos
             // 1. Encontrar o Ativo
             ListarAtivos("EM_ESTOQUE");
             
-            // CORREÇÃO (CS8600, CS8604): Usando o operador '!'
             Console.Write("\nDigite o ID Patrimonial do Ativo a alocar: ");
             string idAtivo = Console.ReadLine()!;
             
-            // CORREÇÃO (CS8600): 'BuscarAtivoPorId' retorna 'Ativo?', então declaramos a variável como 'Ativo?'
+            // 'BuscarAtivoPorId' retorna 'Ativo?', então declaramos a variável como 'Ativo?'
             Ativo? ativo = BuscarAtivoPorId(idAtivo);
 
             if (ativo == null)
@@ -238,11 +232,10 @@ namespace GestaoDeAtivos
             // 2. Encontrar o Colaborador
             ListarColaboradores();
             
-            // CORREÇÃO (CS8600, CS8604): Usando o operador '!'
             Console.Write("\nDigite o ID (Matrícula) do Colaborador: ");
             string idColab = Console.ReadLine()!;
 
-            // CORREÇÃO (CS8600): 'BuscarColaboradorPorId' retorna 'Colaborador?', então declaramos como 'Colaborador?'
+            // 'BuscarColaboradorPorId' retorna 'Colaborador?', então declaramos como 'Colaborador?'
             Colaborador? colab = BuscarColaboradorPorId(idColab);
 
             if (colab == null)
@@ -273,11 +266,10 @@ namespace GestaoDeAtivos
             // 1. Encontrar o Ativo
             ListarAtivos("EM_USO");
             
-            // CORREÇÃO (CS8600, CS8604): Usando o operador '!'
             Console.Write("\nDigite o ID Patrimonial do Ativo a retornar: ");
             string idAtivo = Console.ReadLine()!;
             
-            // CORREÇÃO (CS8600): 'BuscarAtivoPorId' retorna 'Ativo?'
+            // 'BuscarAtivoPorId' retorna 'Ativo?'
             Ativo? ativo = BuscarAtivoPorId(idAtivo);
 
             if (ativo == null)
@@ -286,7 +278,6 @@ namespace GestaoDeAtivos
                 return;
             }
 
-            // CORREÇÃO (CS8600): Usando o operador '!'
             Console.Write("Motivo do Retorno (ex: Manutenção, Descarte, Troca): ");
             string motivo = Console.ReadLine()!;
             Console.Write("Novo Status (1 para EmEstoque, 2 para Manutencao): ");
