@@ -17,7 +17,7 @@ namespace GestaoDeAtivos
         public static void Main(string[] args)
         {
             Console.WriteLine("--- Bem-vindo ao Sistema de Gestão de Ativos (SGA-TI) ---");
-            
+
             DB_Usuarios.Add(new Usuario("admin", "admin", PapelUsuario.TecnicoTI));
 
             bool executando = true;
@@ -25,12 +25,12 @@ namespace GestaoDeAtivos
             {
                 // 1. Exibir o menu de opções
                 ExibirMenuPrincipal();
-                
+
                 // 2. Ler a escolha do usuário
                 // 'ReadLine' retorna string?, mas 'opcao' era 'string'.
                 // Mudamos 'opcao' para 'string?' para aceitar o nulo.
                 string? opcao = Console.ReadLine();
-                
+
                 // 3. Executar a ação escolhida
                 switch (opcao)
                 {
@@ -99,7 +99,7 @@ namespace GestaoDeAtivos
         {
             Console.Clear();
             Console.WriteLine("--- 1. Cadastro de Novo Hardware ---");
-            
+
             // Operador '!' (null-forgiving) utilizado para dizer ao compilador que garantimos que ReadLine() não será nulo.
             Console.Write("Tipo (ex: Notebook): ");
             string tipo = Console.ReadLine()!;
@@ -111,12 +111,12 @@ namespace GestaoDeAtivos
             string numSerie = Console.ReadLine()!;
 
             var novoHardware = new AtivoHardware(tipo, marca, modelo, DateTime.Now, numSerie);
-            
+
             DB_Ativos.Add(novoHardware);
 
             Console.WriteLine($"\nSUCESSO! Ativo '{novoHardware.Marca} {novoHardware.Modelo}' criado.");
             Console.WriteLine($"ID Patrimonial gerado: {novoHardware.IdPatrimonial}");
-            Console.WriteLine($"Status: {novoHardware.Status}"); 
+            Console.WriteLine($"Status: {novoHardware.Status}");
         }
 
         private static void CadastrarLicenca()
@@ -136,12 +136,12 @@ namespace GestaoDeAtivos
 
             Console.WriteLine($"\nSUCESSO! Licença '{novaLicenca.NomeSoftware}' (ID: {novaLicenca.IdLicenca}) criada.");
         }
-        
+
         private static void CadastrarSoftware()
         {
             Console.Clear();
             Console.WriteLine("--- 3. Cadastro de Ativo (Software) ---");
-            
+
             if (DB_Licencas.Count == 0)
             {
                 Console.WriteLine("ERRO: Você precisa cadastrar uma (Licença Mãe) primeiro (Opção 2).");
@@ -153,16 +153,16 @@ namespace GestaoDeAtivos
             {
                 Console.WriteLine($"ID: {l.IdLicenca} | Nome: {l.NomeSoftware} | Vagas: {l.CapacidadeTotal - l.GetInstalacoesAtivas()}");
             }
-            
+
             Console.Write("Digite o ID da Licença-Mãe para vincular este software: ");
             int idLicenca = int.Parse(Console.ReadLine()!);
-            
+
             // 'licencaMae' pode ser nula (FirstOrDefault).
             // Declaramos como 'Licenca?' (anulável).
             Licenca? licencaMae = DB_Licencas.FirstOrDefault(l => l.IdLicenca == idLicenca);
-            
+
             // O 'if' abaixo já trata o caso nulo, então o compilador fica satisfeito.
-            if(licencaMae == null)
+            if (licencaMae == null)
             {
                 Console.WriteLine("ERRO: Licença-Mãe não encontrada.");
                 return;
@@ -174,18 +174,18 @@ namespace GestaoDeAtivos
             try
             {
                 var novoSoftware = new AtivoSoftware(
-                    tipo: "Software", 
-                    marca: licencaMae.NomeSoftware, 
-                    modelo: "Instalação", 
-                    dataAquisicao: DateTime.Now, 
-                    chaveLicenca: chave, 
+                    tipo: "Software",
+                    marca: licencaMae.NomeSoftware,
+                    modelo: "Instalação",
+                    dataAquisicao: DateTime.Now,
+                    chaveLicenca: chave,
                     licencaAssociada: licencaMae
                 );
 
                 DB_Ativos.Add(novoSoftware);
                 Console.WriteLine($"\nSUCESSO! Ativo de Software (ID: {novoSoftware.IdPatrimonial}) criado e vinculado à licença '{licencaMae.NomeSoftware}'.");
             }
-            catch (InvalidOperationException e) 
+            catch (InvalidOperationException e)
             {
                 Console.WriteLine($"\nFALHA AO CRIAR: {e.Message}");
             }
@@ -196,17 +196,17 @@ namespace GestaoDeAtivos
             Console.Clear();
             Console.WriteLine("--- 4. Cadastro de Novo Colaborador ---");
 
-            Console.Write("ID (Matrícula, ex: C1001): ");
-            string id = Console.ReadLine()!;
             Console.Write("Nome: ");
             string nome = Console.ReadLine()!;
             Console.Write("Departamento: ");
             string depto = Console.ReadLine()!;
 
-            var novoColab = new Colaborador(id, nome, depto);
+            var novoColab = new Colaborador(nome, depto);
             DB_Colaboradores.Add(novoColab);
 
-            Console.WriteLine($"\nSUCESSO! Colaborador '{novoColab.Nome}' (ID: {novoColab.IdColaborador}) criado.");
+            Console.WriteLine($"\nSUCESSO! Colaborador '{novoColab.Nome}' criado.");
+            // Informa ao usuário qual ID foi gerado
+            Console.WriteLine($"O ID (Matrícula) gerado automaticamente é: {novoColab.IdColaborador}");
         }
 
         private static void AlocarAtivo()
@@ -216,10 +216,10 @@ namespace GestaoDeAtivos
 
             // 1. Encontrar o Ativo
             ListarAtivos("EM_ESTOQUE");
-            
+
             Console.Write("\nDigite o ID Patrimonial do Ativo a alocar: ");
             string idAtivo = Console.ReadLine()!;
-            
+
             // 'BuscarAtivoPorId' retorna 'Ativo?', então declaramos a variável como 'Ativo?'
             Ativo? ativo = BuscarAtivoPorId(idAtivo);
 
@@ -231,9 +231,9 @@ namespace GestaoDeAtivos
 
             // 2. Encontrar o Colaborador
             ListarColaboradores();
-            
+
             Console.Write("\nDigite o ID (Matrícula) do Colaborador: ");
-            string idColab = Console.ReadLine()!;
+            int idColab = int.Parse(Console.ReadLine()!);
 
             // 'BuscarColaboradorPorId' retorna 'Colaborador?', então declaramos como 'Colaborador?'
             Colaborador? colab = BuscarColaboradorPorId(idColab);
@@ -257,7 +257,7 @@ namespace GestaoDeAtivos
                 Console.WriteLine($"\nFALHA NA ALOCAÇÃO: {e.Message}");
             }
         }
-        
+
         private static void RetornarAtivo()
         {
             Console.Clear();
@@ -265,10 +265,10 @@ namespace GestaoDeAtivos
 
             // 1. Encontrar o Ativo
             ListarAtivos("EM_USO");
-            
+
             Console.Write("\nDigite o ID Patrimonial do Ativo a retornar: ");
             string idAtivo = Console.ReadLine()!;
-            
+
             // 'BuscarAtivoPorId' retorna 'Ativo?'
             Ativo? ativo = BuscarAtivoPorId(idAtivo);
 
@@ -282,7 +282,7 @@ namespace GestaoDeAtivos
             string motivo = Console.ReadLine()!;
             Console.Write("Novo Status (1 para EmEstoque, 2 para Manutencao): ");
             string? statusOpcao = Console.ReadLine(); // 'string?' para o switch
-            
+
             StatusAtivo novoStatus = (statusOpcao == "2") ? StatusAtivo.Manutencao : StatusAtivo.EmEstoque;
 
             // 3. Executar Retorno
@@ -300,18 +300,18 @@ namespace GestaoDeAtivos
 
         private static void ListarAtivos(string filtroStatus = "")
         {
-            if(filtroStatus == "")
+            if (filtroStatus == "")
                 Console.Clear();
-            
+
             Console.WriteLine($"\n--- Lista de Ativos ({filtroStatus}) ---");
-            
+
             var ativosParaListar = DB_Ativos;
 
             if (filtroStatus == "EM_ESTOQUE")
                 ativosParaListar = DB_Ativos.Where(a => a.Status == StatusAtivo.EmEstoque).ToList();
             else if (filtroStatus == "EM_USO")
                 ativosParaListar = DB_Ativos.Where(a => a.Status == StatusAtivo.EmUso).ToList();
-                
+
             if (ativosParaListar.Count == 0)
             {
                 Console.WriteLine("Nenhum ativo encontrado.");
@@ -326,7 +326,7 @@ namespace GestaoDeAtivos
                 Console.WriteLine($"> ID: {ativo.IdPatrimonial} | Tipo: {ativo.Tipo} | Modelo: {ativo.Modelo} | Status: {ativo.Status} | Alocado para: {alocadoPara}");
             }
         }
-        
+
         private static void ListarColaboradores()
         {
             Console.WriteLine("\n--- Lista de Colaboradores ---");
@@ -356,10 +356,9 @@ namespace GestaoDeAtivos
             return DB_Ativos.FirstOrDefault(a => a.IdPatrimonial.Equals(id, StringComparison.OrdinalIgnoreCase));
         }
 
-        // CORREÇÃO: O método agora retorna 'Colaborador?' (anulável)
-        private static Colaborador? BuscarColaboradorPorId(string id)
+        private static Colaborador? BuscarColaboradorPorId(int id)
         {
-            return DB_Colaboradores.FirstOrDefault(c => c.IdColaborador.Equals(id, StringComparison.OrdinalIgnoreCase));
+            return DB_Colaboradores.FirstOrDefault(c => c.IdColaborador == id);
         }
     }
 }

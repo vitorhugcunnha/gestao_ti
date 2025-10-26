@@ -1,0 +1,15 @@
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.AssemblyInfoInputs.cache
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.AssemblyInfo.cs
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.csproj.CoreCompileInputs.cache
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.sourcelink.json
+C:\Users\gabri\Documents\GitHub\gestao_ti\bin\Debug\net9.0\GestaoDeAtivos.exe
+C:\Users\gabri\Documents\GitHub\gestao_ti\bin\Debug\net9.0\GestaoDeAtivos.deps.json
+C:\Users\gabri\Documents\GitHub\gestao_ti\bin\Debug\net9.0\GestaoDeAtivos.runtimeconfig.json
+C:\Users\gabri\Documents\GitHub\gestao_ti\bin\Debug\net9.0\GestaoDeAtivos.dll
+C:\Users\gabri\Documents\GitHub\gestao_ti\bin\Debug\net9.0\GestaoDeAtivos.pdb
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.dll
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\refint\GestaoDeAtivos.dll
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.pdb
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\GestaoDeAtivos.genruntimeconfig.cache
+C:\Users\gabri\Documents\GitHub\gestao_ti\obj\Debug\net9.0\ref\GestaoDeAtivos.dll
