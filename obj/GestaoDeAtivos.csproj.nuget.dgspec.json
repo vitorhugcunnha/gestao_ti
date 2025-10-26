@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\Documents\\AulasFacul\\GestaoDeAtivos\\GestaoDeAtivos.csproj": {}
+    "C:\\Users\\gabri\\Documents\\GitHub\\gestao_ti\\GestaoDeAtivos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\Documents\\AulasFacul\\GestaoDeAtivos\\GestaoDeAtivos.csproj": {
+    "C:\\Users\\gabri\\Documents\\GitHub\\gestao_ti\\GestaoDeAtivos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\Documents\\AulasFacul\\GestaoDeAtivos\\GestaoDeAtivos.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Documents\\GitHub\\gestao_ti\\GestaoDeAtivos.csproj",
         "projectName": "GestaoDeAtivos",
-        "projectPath": "C:\\Users\\gabri\\Documents\\AulasFacul\\GestaoDeAtivos\\GestaoDeAtivos.csproj",
+        "projectPath": "C:\\Users\\gabri\\Documents\\GitHub\\gestao_ti\\GestaoDeAtivos.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\Documents\\AulasFacul\\GestaoDeAtivos\\obj\\",
+        "outputPath": "C:\\Users\\gabri\\Documents\\GitHub\\gestao_ti\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config"
