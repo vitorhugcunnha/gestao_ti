@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿Tela tela = new Tela(50, 10);
+
+while (true)
+{
+    string opcao = tela.MolduraMenu();
+    switch (opcao)
+    {
+        
+    }
+}
