@@ -1,7 +1,7 @@
 public class autenticaoUsuario
 {
-    public bool Autenticar(string nome, senha)
+    public bool Autenticar(string nome, string senha)
     {
-
+        string 
     }
 } 
