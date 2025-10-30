@@ -1,4 +1,5 @@
 ﻿Tela tela = new Tela(50, 10);
+autenticacaoUsuario autenticacao = new autenticacaoUsuario();
 
 while (true)
 {
