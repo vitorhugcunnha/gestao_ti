@@ -1,23 +1,18 @@
-public class Tela
+public class Tela : GestaoCore.Models.Tela
 {
     private int largura;
     private int altura;
-    private int colunaInicial;
-    private int linhaInicial;
+
 
     public Tela(int largura, int altura)
     {
         this.largura = largura;
         this.altura = altura;
-        this.colunaInicial = 0;
-        this.linhaInicial = 0;
     }
     public Tela(int largura, int altura, int coluna, int linha)
     {
         this.largura = largura;
         this.altura = altura;
-        this.colunaInicial = coluna;
-        this.linhaInicial = linha;
     }
     public string MolduraMenu()
     {
@@ -128,8 +123,26 @@ public class Tela
     public void AlternativaIncorreta()
     {
         Console.Clear();
-            MontarMolduraCentralizada("Alternativa Incorreta!");
-            Thread.Sleep(2000);
-            Console.ReadKey();
+        MontarMolduraCentralizada("Alternativa Incorreta!");
+        Console.ReadKey();
+    }
+
+    public void falhaAutenticacao()
+    {
+        Console.Clear();
+        MontarMolduraCentralizada("Usuario ou senha incorretos!");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+    public void sucessoAutenticacao()
+    {
+        Console.Clear();
+        MontarMolduraCentralizada("Login realizado com sucesso!");
+        Thread.Sleep(1500);
+        Console.Clear();
+        MontarMolduraCentralizada("Bem-vindo ao Sistema Gestao de TI!");
+        Thread.Sleep(1500);
+        Console.Clear();
     }
 }

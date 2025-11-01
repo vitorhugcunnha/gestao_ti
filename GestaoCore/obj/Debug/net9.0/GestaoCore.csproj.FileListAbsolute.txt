@@ -22,3 +22,4 @@ C:\Users\vitor.cunha\Desktop\gestao_ti\GestaoCore\obj\Debug\net9.0\GestaoCore.dl
 C:\Users\vitor.cunha\Desktop\gestao_ti\GestaoCore\obj\Debug\net9.0\refint\GestaoCore.dll
 C:\Users\vitor.cunha\Desktop\gestao_ti\GestaoCore\obj\Debug\net9.0\GestaoCore.pdb
 C:\Users\vitor.cunha\Desktop\gestao_ti\GestaoCore\obj\Debug\net9.0\ref\GestaoCore.dll
+C:\Users\VITOR HUGO\Desktop\PastaDoVitor\Repositorios\gestao_ti\GestaoCore\obj\Debug\net9.0\GestaoCore.csproj.AssemblyReference.cache
