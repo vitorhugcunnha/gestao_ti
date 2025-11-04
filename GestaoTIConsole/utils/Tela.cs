@@ -1,7 +1,3 @@
-using System;
-using System.Threading;
-
-
 namespace GestaoCore.Models
 {
     public class Tela : GestaoCore.Models.ITela
