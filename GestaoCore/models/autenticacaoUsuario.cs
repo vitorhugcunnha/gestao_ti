@@ -1,19 +1,22 @@
 using MySql.Data.MySqlClient;
 namespace GestaoCore.Models
 {
-    public interface Tela
+    public interface ITela
     {
         void TelaLogin(out string usuario, out string senha);
         void falhaAutenticacao();
         void sucessoAutenticacao();
+        void AlternativaIncorreta();
+        void TelaSair();
+        string telaCrud();
     }
 
     public class autenticacaoUsuario
     {
         private string conn = "server=localhost;database=gestao_ti;user=root;password=;";
-        private Tela tela;
+        private ITela tela;
 
-        public autenticacaoUsuario(Tela tela)
+        public autenticacaoUsuario(ITela tela)
         {
             this.tela = tela;
         }
