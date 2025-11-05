@@ -178,6 +178,68 @@ namespace GestaoCore.Models
             return opcaoCrud;
         }
 
+        public string telaCrudSecundaria(string nomeMenu)
+        {
+            Console.Clear();
+            MontarMolduraCentralizada($"CRUD - {nomeMenu}");
+
+            int col = (Console.WindowWidth / 2) - 33;
+            int lin = (Console.WindowHeight / 2) - 1;
+
+            Console.SetCursorPosition(col, lin);
+            Console.WriteLine("C - Criar  |  A - Alterar  |  L - Listar  |  D - Deletar  |  V - Voltar");
+
+            Console.SetCursorPosition(col + 28, lin + 2);
+            Console.Write("Opção: ");
+            string opcao = Console.ReadLine()!.Trim().ToUpper();
+
+            return opcao;
+        }
+
+        public void MontarMolduraAdaptavel(string titulo, string[] linhas)
+        {
+            Console.Clear();
+            int larguraConsole = Console.WindowWidth;
+            int alturaConsole = Console.WindowHeight;
+
+
+            int larguraMinima = 80;
+            int larguraTexto = Math.Max(titulo.Length + 4, larguraMinima);
+
+            foreach (var linha in linhas)
+                larguraTexto = Math.Max(larguraTexto, linha.Length + 4);
+
+            int alturaMoldura = linhas.Length + 4;
+
+
+            int esquerda = (larguraConsole - larguraTexto) / 2;
+            int topo = (alturaConsole - alturaMoldura) / 2;
+
+            Console.SetCursorPosition(esquerda, topo);
+            Console.Write("╔" + new string('═', larguraTexto - 2) + "╗");
+
+
+            Console.SetCursorPosition(esquerda, topo + 1);
+            string tituloCentralizado = titulo.PadLeft((larguraTexto + titulo.Length) / 2).PadRight(larguraTexto - 2);
+            Console.Write("║" + tituloCentralizado + "║");
+
+
+            // Console.SetCursorPosition(esquerda, topo + 2);
+            // Console.Write("╠" + new string('═', larguraTexto - 2) + "╣");
+
+
+            for (int i = 0; i < linhas.Length; i++)
+            {
+                Console.SetCursorPosition(esquerda, topo + 3 + i);
+                string linha = linhas[i];
+                string linhaCentralizada = linha.PadLeft((larguraTexto + linha.Length) / 2).PadRight(larguraTexto - 2);
+                Console.Write("║" + linhaCentralizada + "║");
+            }
+
+            Console.SetCursorPosition(esquerda, topo + alturaMoldura - 1);
+            Console.Write("╚" + new string('═', larguraTexto - 2) + "╝");
+        }
+
 
     }
 }

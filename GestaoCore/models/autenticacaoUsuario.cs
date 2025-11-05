@@ -9,6 +9,9 @@ namespace GestaoCore.Models
         void AlternativaIncorreta();
         void TelaSair();
         string telaCrud();
+        string telaCrudSecundaria(string nomeMenu);
+        void MontarMolduraCentralizada(string titulo);
+        void MontarMolduraAdaptavel(string titulo, string[] conteudo);
     }
 
     public class autenticacaoUsuario

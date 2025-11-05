@@ -2,6 +2,8 @@
 
 Tela tela = new Tela(50, 10);
 Tela tela2 = new Tela(60, 30);
+Tela tela3 = new Tela(80, 10);
+Tela tela4 = new Tela(95, 10);
 chamadaCRUD chamada = new chamadaCRUD();
 autenticacaoUsuario autenticacao = new autenticacaoUsuario(tela);
 
@@ -15,12 +17,11 @@ while (true)
             if (autenticacao.autenticar())
             {
                 tela.sucessoAutenticacao();
-                bool sair = chamada.chamarCRUD(tela, tela2);
+                bool sair = chamada.chamarCRUD(tela, tela2, tela3, tela4);
                 if (sair)
                     return;
             }
             break;
-
         case "2":
             tela.TelaSair();
             return;
