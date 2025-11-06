@@ -11,7 +11,7 @@ namespace GestaoCore.Models
         string telaCrud();
         string telaCrudSecundaria(string nomeMenu);
         void MontarMolduraCentralizada(string titulo);
-        void MontarMolduraAdaptavel(string titulo, string[] conteudo);
+        void MostrarMensagem(string mensagem);
     }
 
     public class autenticacaoUsuario

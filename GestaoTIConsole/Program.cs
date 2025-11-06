@@ -3,7 +3,7 @@
 Tela tela = new Tela(50, 10);
 Tela tela2 = new Tela(60, 30);
 Tela tela3 = new Tela(80, 10);
-Tela tela4 = new Tela(95, 10);
+Tela tela4 = new Tela(60, 20);
 chamadaCRUD chamada = new chamadaCRUD();
 autenticacaoUsuario autenticacao = new autenticacaoUsuario(tela);
 
