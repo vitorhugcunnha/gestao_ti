@@ -1,6 +1,5 @@
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic; // ← necessário para List<>
 
 namespace GestaoCore.dao
 {

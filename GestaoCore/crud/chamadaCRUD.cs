@@ -1,4 +1,3 @@
-// ...existing code...
 using System;
 using GestaoCore.Models;
 using GestaoCore.crud;
@@ -57,7 +56,36 @@ namespace GestaoCore.Models
                         break;
 
                     case "4":
-                        tela3.telaCrudSecundaria("Colaborador");
+                        var crudColaborador = new CrudColaborador(tela, tela2, tela3, tela4);
+                        bool voltarDoColaborador = false;
+
+                        while (!voltarDoColaborador)
+                        {
+                            string opcaoSecundaria = tela3.telaCrudSecundaria("Colaborador");
+
+                            switch (opcaoSecundaria)
+                            {
+                                case "C":
+                                    crudColaborador.Criar();
+                                    break;
+                                case "A":
+                                    crudColaborador.Alterar();
+                                    break;
+                                case "L":
+                                    crudColaborador.Listar();
+                                    break;
+                                case "D":
+                                    crudColaborador.Deletar();
+                                    break;
+                                case "V":
+                                    crudColaborador.Voltar();
+                                    voltarDoColaborador = true;
+                                    break;
+                                default:
+                                    tela.AlternativaIncorreta();
+                                    break;
+                            }
+                        }
                         break;
 
                     case "5":
@@ -76,4 +104,3 @@ namespace GestaoCore.Models
         }
     }
 }
-// ...existing code...
