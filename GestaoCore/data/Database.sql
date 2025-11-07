@@ -34,6 +34,8 @@ create table software (
 create table colaborador (
     id int auto_increment primary key,
     nome varchar(100) not null,
+    email varchar(100) not null,
+    cargo varchar(100) not null,
     departamento varchar(100) not null
 );
 
