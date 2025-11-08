@@ -1,54 +1,52 @@
+using System;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
 namespace GestaoCore.dao
 {
-    public class Colaborador
+    public class Licenca
     {
         public int Id { get; set; }
         public string Nome { get; set; } = "";
-        public string Email { get; set; } = "";
-        public string Cargo { get; set; } = "";
-        public string Departamento { get; set; } = "";
+        public DateTime DataValidade { get; set; }
     }
 
-    public class ColaboradorDAO
+    public class LicencaDAO
     {
         private readonly string connectionString =
             "server=localhost;database=gestao_ti;user=root;password=;";
 
-        public bool Inserir(Colaborador colaborador)
+        public bool Inserir(Licenca licenca)
         {
             try
             {
                 using (var conexao = new MySqlConnection(connectionString))
                 {
                     conexao.Open();
-
-                    string sql = @"INSERT INTO colaborador (nome, email, cargo, departamento)
-                                   VALUES (@nome, @email, @cargo, @departamento)";
-
+                    string sql = "INSERT INTO licenca (nome_software, data_validade) VALUES (@Nome, @DataValidade)";
                     using (var cmd = new MySqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@nome", colaborador.Nome);
-                        cmd.Parameters.AddWithValue("@email", colaborador.Email);
-                        cmd.Parameters.AddWithValue("@cargo", colaborador.Cargo);
-                        cmd.Parameters.AddWithValue("@departamento", colaborador.Departamento);
+                        cmd.Parameters.AddWithValue("@Nome", licenca.Nome);
+                        cmd.Parameters.AddWithValue("@DataValidade", licenca.DataValidade);
 
-                        int linhasAfetadas = cmd.ExecuteNonQuery();
-                        return linhasAfetadas > 0;
+                        int linhas = cmd.ExecuteNonQuery();
+                        return linhas > 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao inserir colaborador: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Erro ao inserir licença: {ex.Message}");
+                Console.ResetColor();
+                Console.ReadKey();
                 return false;
             }
         }
 
-        public List<Colaborador> Listar()
+        public List<Licenca> Listar()
         {
-            var lista = new List<Colaborador>();
+            var lista = new List<Licenca>();
 
             try
             {
@@ -56,19 +54,17 @@ namespace GestaoCore.dao
                 {
                     conexao.Open();
 
-                    string sql = "SELECT id, nome, email, cargo, departamento FROM colaborador";
+                    string sql = "SELECT id, nome_software, data_validade FROM licenca";
                     using (var cmd = new MySqlCommand(sql, conexao))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            lista.Add(new Colaborador
+                            lista.Add(new Licenca
                             {
                                 Id = reader.GetInt32("id"),
-                                Nome = reader.GetString("nome"),
-                                Email = reader.GetString("email"),
-                                Cargo = reader.GetString("cargo"),
-                                Departamento = reader.GetString("departamento")
+                                Nome = reader.GetString("nome_software"),
+                                DataValidade = reader.GetDateTime("data_validade")
                             });
                         }
                     }
@@ -76,13 +72,13 @@ namespace GestaoCore.dao
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao listar colaboradores: {ex.Message}");
+                Console.WriteLine($"Erro ao listar licenças: {ex.Message}");
             }
 
             return lista;
         }
 
-        public Colaborador? BuscarPorId(int id)
+        public Licenca? BuscarPorId(int id)
         {
             try
             {
@@ -90,21 +86,20 @@ namespace GestaoCore.dao
                 {
                     conexao.Open();
 
-                    string sql = "SELECT id, nome, email, cargo, departamento FROM colaborador WHERE id = @id";
+                    string sql = "SELECT id, nome_software, data_validade FROM licenca WHERE id = @id";
                     using (var cmd = new MySqlCommand(sql, conexao))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
+
                         using (var reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                return new Colaborador
+                                return new Licenca
                                 {
                                     Id = reader.GetInt32("id"),
-                                    Nome = reader.GetString("nome"),
-                                    Email = reader.GetString("email"),
-                                    Cargo = reader.GetString("cargo"),
-                                    Departamento = reader.GetString("departamento")
+                                    Nome = reader.GetString("nome_software"),
+                                    DataValidade = reader.GetDateTime("data_validade")
                                 };
                             }
                         }
@@ -113,13 +108,13 @@ namespace GestaoCore.dao
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao buscar colaborador: {ex.Message}");
+                Console.WriteLine($"Erro ao buscar licença: {ex.Message}");
             }
 
             return null;
         }
 
-        public bool Atualizar(Colaborador colaborador)
+        public bool Atualizar(Licenca licenca)
         {
             try
             {
@@ -127,20 +122,15 @@ namespace GestaoCore.dao
                 {
                     conexao.Open();
 
-                    string sql = @"UPDATE colaborador SET 
-                                   nome = @nome, 
-                                   email = @email, 
-                                   cargo = @cargo, 
-                                   departamento = @departamento
+                    string sql = @"UPDATE licenca 
+                                   SET nome_software = @nome, data_validade = @data_validade 
                                    WHERE id = @id";
 
                     using (var cmd = new MySqlCommand(sql, conexao))
                     {
-                        cmd.Parameters.AddWithValue("@nome", colaborador.Nome);
-                        cmd.Parameters.AddWithValue("@email", colaborador.Email);
-                        cmd.Parameters.AddWithValue("@cargo", colaborador.Cargo);
-                        cmd.Parameters.AddWithValue("@departamento", colaborador.Departamento);
-                        cmd.Parameters.AddWithValue("@id", colaborador.Id);
+                        cmd.Parameters.AddWithValue("@nome", licenca.Nome);
+                        cmd.Parameters.AddWithValue("@data_validade", licenca.DataValidade);
+                        cmd.Parameters.AddWithValue("@id", licenca.Id);
 
                         int linhasAfetadas = cmd.ExecuteNonQuery();
                         return linhasAfetadas > 0;
@@ -149,7 +139,7 @@ namespace GestaoCore.dao
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao atualizar colaborador: {ex.Message}");
+                Console.WriteLine($"Erro ao atualizar licença: {ex.Message}");
                 return false;
             }
         }
@@ -162,7 +152,7 @@ namespace GestaoCore.dao
                 {
                     conexao.Open();
 
-                    string sql = "DELETE FROM colaborador WHERE id = @id";
+                    string sql = "DELETE FROM licenca WHERE id = @id";
 
                     using (var cmd = new MySqlCommand(sql, conexao))
                     {
@@ -175,7 +165,7 @@ namespace GestaoCore.dao
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao excluir colaborador: {ex.Message}");
+                Console.WriteLine($"Erro ao excluir licença: {ex.Message}");
                 return false;
             }
         }

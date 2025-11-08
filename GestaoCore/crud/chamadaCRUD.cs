@@ -48,11 +48,69 @@ namespace GestaoCore.Models
                         break;
 
                     case "2":
-                        tela3.telaCrudSecundaria("Software");
-                        break;
+                    
+                        var crudSoftware = new CrudSoftware(tela, tela2, tela3, tela4);
+                        bool voltarDoSoftware = false;
 
+                        while (!voltarDoSoftware)
+                        {
+                            string opcaoSecundaria = tela3.telaCrudSecundaria("Software");
+
+                            switch (opcaoSecundaria)
+                            {
+                                case "C":
+                                    crudSoftware.Criar();
+                                    break;
+                                case "A":
+                                    crudSoftware.Alterar();
+                                    break;
+                                case "L":
+                                    crudSoftware.Listar();
+                                    break;
+                                case "D":
+                                    crudSoftware.Deletar();
+                                    break;
+                                case "V":
+                                    crudSoftware.Voltar();
+                                    voltarDoSoftware = true;
+                                    break;
+                                default:
+                                    tela.AlternativaIncorreta();
+                                    break;
+                            }
+                        }
+                        break;
                     case "3":
-                        tela3.telaCrudSecundaria("Licenca");
+                        var crudLicenca = new CrudLicenca(tela, tela2, tela3, tela4);
+                        bool voltarDaLicenca = false;
+
+                        while (!voltarDaLicenca)
+                        {
+                            string opcaoSecundaria = tela3.telaCrudSecundaria("Licenca");
+
+                            switch (opcaoSecundaria)
+                            {
+                                case "C":
+                                    crudLicenca.Criar();
+                                    break;
+                                case "A":
+                                    crudLicenca.Alterar();
+                                    break;
+                                case "L":
+                                    crudLicenca.Listar();
+                                    break;
+                                case "D":
+                                    crudLicenca.Deletar();
+                                    break;
+                                case "V":
+                                    crudLicenca.Voltar();
+                                    voltarDaLicenca = true;
+                                    break;
+                                default:
+                                    tela.AlternativaIncorreta();
+                                    break;
+                            }
+                        }
                         break;
 
                     case "4":

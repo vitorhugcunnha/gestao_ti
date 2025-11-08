@@ -205,37 +205,43 @@ namespace GestaoCore.crud
         public void Listar()
         {
             Console.Clear();
-
-            var dao = new HardwareDAO();
             var hardwares = dao.Listar();
 
-            string[] headers = { "ID", "TIPO", "MARCA", "MODELO", "Nº SÉRIE", "STATUS" };
-
-            int[] col = new int[headers.Length];
-            for (int i = 0; i < headers.Length; i++)
+            if (hardwares.Count == 0)
             {
-                col[i] = headers[i].Length;
+                tela.MontarMolduraCentralizada("Nenhum hardware cadastrado.");
+                Console.SetCursorPosition((Console.WindowWidth / 2) - 15, (Console.WindowHeight / 2) + 2);
+                Console.Write("Pressione qualquer tecla para voltar...");
+                Console.ReadKey();
+                return;
             }
 
-            foreach (var hw in hardwares)
+            string[] headers = { "ID", "TIPO", "MARCA", "MODELO", "N° SÉRIE", "STATUS" };
+            int[] col = new int[headers.Length];
+
+            for (int i = 0; i < headers.Length; i++)
+                col[i] = headers[i].Length;
+
+            foreach (var h in hardwares)
             {
-                col[0] = Math.Max(col[0], hw.Id.ToString().Length);
-                col[1] = Math.Max(col[1], hw.Tipo.Length);
-                col[2] = Math.Max(col[2], hw.Marca.Length);
-                col[3] = Math.Max(col[3], hw.Modelo.Length);
-                col[4] = Math.Max(col[4], hw.NumeroSerie.Length);
-                col[5] = Math.Max(col[5], hw.Status.Length);
+                col[0] = Math.Max(col[0], h.Id.ToString().Length);
+                col[1] = Math.Max(col[1], h.Tipo.Length);
+                col[2] = Math.Max(col[2], h.Marca.Length);
+                col[3] = Math.Max(col[3], h.Modelo.Length);
+                col[4] = Math.Max(col[4], h.NumeroSerie.Length);
+                col[5] = Math.Max(col[5], h.Status.Length);
             }
 
             for (int i = 0; i < col.Length; i++)
-            {
-                col[i] += 1;
-            }
+                col[i] += 2;
 
-            int totalCols = col.Sum() + (headers.Length + 2) + 1;
+            int totalTabela = col.Sum() + headers.Length + 3;
+            string mensagem = "Pressione qualquer tecla para continuar...";
+            int totalCols = Math.Max(totalTabela, mensagem.Length + 4);
+
+            // Centralização da tabela
             int larguraConsole = Console.WindowWidth;
             int alturaConsole = Console.WindowHeight;
-
             int colunaInicial = Math.Max((larguraConsole - totalCols) / 2, 0);
             int alturaTabela = 7 + hardwares.Count;
             int linhaInicial = Math.Max((alturaConsole - alturaTabela) / 2, 0);
@@ -244,46 +250,51 @@ namespace GestaoCore.crud
             Console.WriteLine("╔" + new string('═', totalCols - 2) + "╗");
 
             string titulo = "Lista de Hardwares";
-            int paddingTitulo = (totalCols - 2 - titulo.Length) / 2;
+            int paddingTitulo = Math.Max((totalCols - 2 - titulo.Length) / 2, 0);
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
-            Console.WriteLine("║" + new string(' ', paddingTitulo) + titulo + new string(' ', totalCols - 2 - paddingTitulo - titulo.Length) + "║");
+            Console.WriteLine("║" + new string(' ', paddingTitulo) + titulo +
+                            new string(' ', totalCols - 2 - paddingTitulo - titulo.Length) + "║");
 
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
             Console.WriteLine("╠" + new string('═', totalCols - 2) + "╣");
+
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
             Console.Write("║ ");
             for (int i = 0; i < headers.Length; i++)
-            {
                 Console.Write(headers[i].PadRight(col[i]));
-                if (i < headers.Length - 1) Console.Write(" ");
-            }
             Console.WriteLine(" ║");
+
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
             Console.WriteLine("╟" + new string('─', totalCols - 2) + "╢");
 
-            foreach (var hw in hardwares)
+            foreach (var h in hardwares)
             {
                 Console.SetCursorPosition(colunaInicial, Console.CursorTop);
                 Console.Write("║ ");
-                Console.Write(hw.Id.ToString().PadRight(col[0]));
-                Console.Write(" " + hw.Tipo.PadRight(col[1]));
-                Console.Write(" " + hw.Marca.PadRight(col[2]));
-                Console.Write(" " + hw.Modelo.PadRight(col[3]));
-                Console.Write(" " + hw.NumeroSerie.PadRight(col[4]));
-                Console.Write(" " + hw.Status.PadRight(col[5]));
+                Console.Write(h.Id.ToString().PadRight(col[0]));
+                Console.Write(h.Tipo.PadRight(col[1]));
+                Console.Write(h.Marca.PadRight(col[2]));
+                Console.Write(h.Modelo.PadRight(col[3]));
+                Console.Write(h.NumeroSerie.PadRight(col[4]));
+                Console.Write(h.Status.PadRight(col[5]));
                 Console.WriteLine(" ║");
             }
 
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
             Console.WriteLine("╠" + new string('═', totalCols - 2) + "╣");
-            string mensagem = "Pressione qualquer tecla para continuar...";
-            int paddingMsg = (totalCols - 2 - mensagem.Length) / 2;
+
+            int paddingMsg = Math.Max((totalCols - 2 - mensagem.Length) / 2, 0);
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
-            Console.WriteLine("║" + new string(' ', paddingMsg) + mensagem + new string(' ', totalCols - 2 - paddingMsg - mensagem.Length) + "║");
+            Console.WriteLine("║" + new string(' ', paddingMsg) + mensagem +
+                            new string(' ', totalCols - 2 - paddingMsg - mensagem.Length) + "║");
+
             Console.SetCursorPosition(colunaInicial, Console.CursorTop);
             Console.WriteLine("╚" + new string('═', totalCols - 2) + "╝");
+
             Console.ReadKey();
         }
+
+
 
         public void Deletar()
         {

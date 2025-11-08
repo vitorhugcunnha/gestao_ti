@@ -1,4 +1,5 @@
 using MySql.Data.MySqlClient;
+
 namespace GestaoCore.Models
 {
     public interface ITela

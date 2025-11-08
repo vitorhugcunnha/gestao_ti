@@ -19,7 +19,6 @@ create table hardware (
 create table licenca (
     id int auto_increment primary key,
     nome_software varchar(100) not null,
-    capacidade_total int not null,
     data_validade date not null
 );
 
@@ -56,5 +55,5 @@ create table alocacao (
 insert into usuario (nome_usuario, senha)
 values
 ('vitor_hugo', '110806');
-
+drop database gestao_ti;
 select * from usuario;
