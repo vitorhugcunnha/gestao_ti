@@ -54,6 +54,4 @@ create table alocacao (
 
 insert into usuario (nome_usuario, senha)
 values
-('vitor_hugo', '110806');
-drop database gestao_ti;
-select * from usuario;
+('adm', '123');

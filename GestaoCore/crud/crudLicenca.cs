@@ -105,72 +105,72 @@ namespace GestaoCore.crud
         }
 
 
-    public void Alterar()
-    {
-        Console.Clear();
-        tela4.MontarMolduraCentralizada("Alterar Licença");
-
-        int col = (Console.WindowWidth / 2) - 25;
-        int lin = (Console.WindowHeight / 2) - 5;
-
-        Console.SetCursorPosition(col, lin);
-        Console.Write("ID: ");
-        string? entrada = Console.ReadLine()?.Trim();
-
-        if (string.IsNullOrEmpty(entrada) || entrada == "0")
+        public void Alterar()
         {
-            Voltar();
-            return;
+            Console.Clear();
+            tela4.MontarMolduraCentralizada("Alterar Licença");
+
+            int col = (Console.WindowWidth / 2) - 25;
+            int lin = (Console.WindowHeight / 2) - 5;
+
+            Console.SetCursorPosition(col, lin);
+            Console.Write("ID: ");
+            string? entrada = Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrEmpty(entrada) || entrada == "0")
+            {
+                Voltar();
+                return;
+            }
+
+            if (!int.TryParse(entrada, out int id))
+            {
+                tela.MontarMolduraCentralizada("ID inválido!");
+                Voltar();
+                return;
+            }
+
+            licencaAtual = dao.BuscarPorId(id);
+            if (licencaAtual == null)
+            {
+                tela.MontarMolduraCentralizada("Licença não encontrada!");
+                Voltar();
+                return;
+            }
+
+            Console.Clear();
+            tela4.MontarMolduraCentralizada("Editar Licença");
+
+            Console.SetCursorPosition(col, lin);
+            Console.WriteLine($"ID: {licencaAtual.Id}");
+
+            Console.SetCursorPosition(col, lin + 2);
+            Console.Write($"NOME ATUAL: {licencaAtual.Nome}");
+            Console.SetCursorPosition(col + 35, lin + 2);
+            Console.Write("Novo NOME: ");
+            string novoNome = Console.ReadLine()?.Trim() ?? "";
+
+            Console.SetCursorPosition(col, lin + 4);
+            Console.Write($"DATA ATUAL: {licencaAtual.DataValidade:yyyy-MM-dd}");
+            Console.SetCursorPosition(col + 35, lin + 4);
+            Console.Write("Nova DATA (AAAA-MM-DD): ");
+            string novaData = Console.ReadLine()?.Trim() ?? "";
+
+            if (!string.IsNullOrEmpty(novoNome))
+                licencaAtual.Nome = novoNome;
+
+            if (!string.IsNullOrEmpty(novaData) && DateTime.TryParse(novaData, out DateTime novaDataVal))
+                licencaAtual.DataValidade = novaDataVal;
+
+            bool sucesso = dao.Atualizar(licencaAtual);
+
+            Console.Clear();
+            tela.MontarMolduraCentralizada(sucesso ? "Licença atualizada com sucesso!" : "Erro ao atualizar licença!");
+
+            Console.SetCursorPosition(col, lin + 3);
+            Console.Write("Pressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
-
-        if (!int.TryParse(entrada, out int id))
-        {
-            tela.MontarMolduraCentralizada("ID inválido!");
-            Voltar();
-            return;
-        }
-
-        licencaAtual = dao.BuscarPorId(id);
-        if (licencaAtual == null)
-        {
-            tela.MontarMolduraCentralizada("Licença não encontrada!");
-            Voltar();
-            return;
-        }
-
-        Console.Clear();
-        tela4.MontarMolduraCentralizada("Editar Licença");
-
-        Console.SetCursorPosition(col, lin);
-        Console.WriteLine($"ID: {licencaAtual.Id}");
-
-        Console.SetCursorPosition(col, lin + 2);
-        Console.Write($"NOME ATUAL: {licencaAtual.Nome}");
-        Console.SetCursorPosition(col + 35, lin + 2);
-        Console.Write("Novo NOME: ");
-        string novoNome = Console.ReadLine()?.Trim() ?? "";
-
-        Console.SetCursorPosition(col, lin + 4);
-        Console.Write($"DATA ATUAL: {licencaAtual.DataValidade:yyyy-MM-dd}");
-        Console.SetCursorPosition(col + 35, lin + 4);
-        Console.Write("Nova DATA (AAAA-MM-DD): ");
-        string novaData = Console.ReadLine()?.Trim() ?? "";
-
-        if (!string.IsNullOrEmpty(novoNome))
-            licencaAtual.Nome = novoNome;
-
-        if (!string.IsNullOrEmpty(novaData) && DateTime.TryParse(novaData, out DateTime novaDataVal))
-            licencaAtual.DataValidade = novaDataVal;
-
-        bool sucesso = dao.Atualizar(licencaAtual);
-
-        Console.Clear();
-        tela.MontarMolduraCentralizada(sucesso ? "Licença atualizada com sucesso!" : "Erro ao atualizar licença!");
-
-        Console.SetCursorPosition(col, lin + 3);
-        Console.Write("Pressione qualquer tecla para continuar...");
-        Console.ReadKey();
-    }
         public void Listar()
         {
             Console.Clear();
@@ -330,6 +330,10 @@ namespace GestaoCore.crud
             tela.MontarMolduraCentralizada("Retornando ao menu anterior...");
             Thread.Sleep(1500);
             Console.Clear();
+        }
+        public int Contar()
+        {
+            return dao.Listar().Count;
         }
     }
 }

@@ -162,21 +162,31 @@ namespace GestaoCore.Models
             Console.SetCursorPosition(col, lin + 2);
             Console.WriteLine("2 - Software");
             Console.SetCursorPosition(col, lin + 4);
-            Console.WriteLine("3 - Lincenca");
+            Console.WriteLine("3 - Licenca");
             Console.SetCursorPosition(col, lin + 6);
             Console.WriteLine("4 - Colaborador");
             Console.SetCursorPosition(col, lin + 8);
-            Console.WriteLine("5 - Alocar ou Retorna");
-            Console.SetCursorPosition(col, lin + 9);
-            Console.WriteLine("um Hardware ou Software");
-            Console.SetCursorPosition(col, lin + 11);
+            Console.WriteLine("5 - Alocar ou Retornar");
+            Console.SetCursorPosition(col, lin + 10);
             Console.WriteLine("6 - Sair");
-            Console.SetCursorPosition(col, lin + 13);
+            Console.SetCursorPosition(col, lin + 12);
             Console.Write("Opção: ");
-            opcaoCrud = Console.ReadLine();
 
+            try
+            {
+                var alert = new Alert(this, this, this, this);
+                alert.VerificarEstoque();
+            }
+            catch (Exception ex)
+            {
+                Console.SetCursorPosition(2, 1);
+                Console.WriteLine($"Erro ao exibir alertas: {ex.Message}");
+            }
+
+            opcaoCrud = Console.ReadLine();
             return opcaoCrud;
         }
+
 
         public string telaCrudSecundaria(string nomeMenu)
         {

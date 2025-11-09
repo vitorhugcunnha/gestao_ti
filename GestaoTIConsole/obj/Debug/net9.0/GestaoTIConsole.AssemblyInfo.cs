@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestaoTIConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f43a00bed63ad1bd7443f304f95ad8ef67a88d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+342762ce5a82be7b0ca9b84e9f6c1688b206145e")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestaoTIConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestaoTIConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

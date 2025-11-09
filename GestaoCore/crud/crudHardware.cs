@@ -239,7 +239,7 @@ namespace GestaoCore.crud
             string mensagem = "Pressione qualquer tecla para continuar...";
             int totalCols = Math.Max(totalTabela, mensagem.Length + 4);
 
-            // Centralização da tabela
+    
             int larguraConsole = Console.WindowWidth;
             int alturaConsole = Console.WindowHeight;
             int colunaInicial = Math.Max((larguraConsole - totalCols) / 2, 0);
@@ -386,6 +386,10 @@ namespace GestaoCore.crud
             tela.MontarMolduraCentralizada("Retornando ao menu anterior...");
             Thread.Sleep(1500);
             Console.Clear();
+        }
+        public int Contar()
+        {
+            return dao.Listar().Count;
         }
     }
 }

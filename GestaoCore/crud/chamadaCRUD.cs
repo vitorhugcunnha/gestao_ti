@@ -8,6 +8,8 @@ namespace GestaoCore.Models
     {
         public bool chamarCRUD(ITela tela, ITela tela2, ITela tela3, ITela tela4)
         {
+            var alert = new Alert(tela, tela2, tela3, tela4);
+
             while (true)
             {
                 string opcaoCrud = tela2.telaCrud();
