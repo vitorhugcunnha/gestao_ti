@@ -48,8 +48,8 @@ namespace GestaoCore.Models
                         break;
 
                     case "2":
-                    
-                        var crudSoftware = new CrudSoftware(tela, tela2, tela3, tela4);
+
+                        var crudSoftware = new crudSoftware(tela, tela2, tela3, tela4);
                         bool voltarDoSoftware = false;
 
                         while (!voltarDoSoftware)
@@ -147,7 +147,7 @@ namespace GestaoCore.Models
                         break;
 
                     case "5":
-                        tela3.telaCrudSecundaria("Alocar ou Retornar um Hardware ou Software");
+                        tela3.telaCrudSecundaria("Alocar TI");
                         break;
 
                     case "6":
