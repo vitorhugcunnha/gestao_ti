@@ -2,6 +2,8 @@
 
 O Sistema de Gestão de Recursos de TI é uma aplicação de console desenvolvida em C# (.NET) com o objetivo de gerenciar os principais ativos tecnológicos de uma organização, como hardware, software, licenças e colaboradores.
 
+Para o sistema funcionar precisa do MySql WorkBench e XAMPP Controll para o sistema funcionar.
+
 Comando para fazer rodar no CMD:
 ```bash
 dotnet run --project GestaoTIConsole/GestaoTIConsole.csproj
