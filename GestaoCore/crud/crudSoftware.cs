@@ -61,6 +61,7 @@ namespace GestaoCore.crud
             var licenca = licencaDAO.BuscarPorId(idLicenca);
             if (licenca == null)
             {
+                Console.Clear();
                 tela4.MontarMolduraCentralizada("Licença não encontrada!");
                 Console.ReadKey();
                 return;

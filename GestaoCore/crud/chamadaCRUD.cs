@@ -147,7 +147,35 @@ namespace GestaoCore.Models
                         break;
 
                     case "5":
-                        tela3.telaCrudSecundaria("Alocar TI");
+                        var crudAlocar = new crudAlocar(tela, tela2, tela3, tela4);
+                        bool voltarDaAlocacao = false;
+                        while (!voltarDaAlocacao)
+                        {
+                            string opcaoSecundaria = tela3.telaCrudSecundaria("Alocar TI");
+
+                            switch (opcaoSecundaria)
+                            {
+                                case "C":
+                                    crudAlocar.Criar();
+                                    break;
+                                case "A":
+                                    crudAlocar.Alterar();
+                                    break;
+                                case "L":
+                                    crudAlocar.Listar();
+                                    break;
+                                case "D":
+                                    crudAlocar.Deletar();
+                                    break;
+                                case "V":
+                                    crudAlocar.Voltar();
+                                    voltarDaAlocacao = true;
+                                    break;
+                                default:
+                                    tela.AlternativaIncorreta();
+                                    break;
+                            }
+                        }
                         break;
 
                     case "6":
